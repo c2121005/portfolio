@@ -6,58 +6,68 @@ import NavBar from './components/NavBar.vue'
 const projects = ref([
   {
     id: 1,
-    title: 'E Commerce Platform',
-    category: 'WEB APP',
+    title: '清水眷村文化園區網站改版',
+    category: ['VUE', 'JAVASCRIPT', 'USER & GRAPHIC DESIGN'],
     tagline: 'A minimalist online shopping experience.',
-    // 🔥 在這裡補上內頁要用的詳細欄位！
-    tech: 'Vue 3 / Vite / Pinia',
-    objective: 'To rebuild the core online shopping experience...',
-    description: 'We abandoned heavy grid systems and embraced typographic tension...',
-    image: '/images/project1.png'
+    tech: 'Vue 3 / Vite / Pinia / Vue 3 / Vite / Pinia / Vue 3 / Vite / Pinia',
+    description: 'We abandoned heavy grid systems and embraced typographic tension We abandoned heavy grid systems and embraced typographic tension We abandoned heavy grid systems and embraced typographic tension We abandoned heavy grid systems and embraced typographic tension We abandoned heavy grid systems and embraced typographic tension We abandoned heavy grid systems and embraced typographic tension We abandoned heavy grid systems and embraced typographic tension We abandoned heavy grid systems and embraced typographic tension We abandoned heavy grid systems and embraced typographic tension ',
+    image: '/images/project1.png',
+    links: [
+      { label: 'OUR LIVE DEMO', url: 'https://nchu-11503-qingshui-artvillage.dev-hub.io/' },
+      { label: '原始網站', url: 'https://www.qingshuiartvillage.net' },
+    ]
   },
   {
     id: 2,
     title: 'E Commerce Platform',
-    category: 'WEB APP',
+    category: ['Vue', 'JavaScript'],
     tagline: 'A minimalist online shopping experience.',
-    // 🔥 在這裡補上內頁要用的詳細欄位！
     tech: 'Vue 3 / Vite / Pinia',
-    objective: 'To rebuild the core online shopping experience...',
     description: 'We abandoned heavy grid systems and embraced typographic tension...',
-    image: '/images/project1.png'
+    image: '/images/project1.png',
+    links: [
+      { label: 'LIVE DEMO', url: 'https://example.com' },
+      { label: 'GITHUB REPO', url: 'https://github.com' }
+    ]
   },
   {
     id: 3,
     title: 'E Commerce Platform',
-    category: 'WEB APP',
+    category: ['Vue', 'JavaScript'],
     tagline: 'A minimalist online shopping experience.',
-    // 🔥 在這裡補上內頁要用的詳細欄位！
     tech: 'Vue 3 / Vite / Pinia',
-    objective: 'To rebuild the core online shopping experience...',
     description: 'We abandoned heavy grid systems and embraced typographic tension...',
-    image: '/images/project1.png'
+    image: '/images/project1.png',
+    links: [
+      { label: 'LIVE DEMO', url: 'https://example.com' },
+      { label: 'GITHUB REPO', url: 'https://github.com' }
+    ]
   },
   {
     id: 4,
     title: 'E Commerce Platform',
-    category: 'WEB APP',
+    category: ['Vue', 'JavaScript'],
     tagline: 'A minimalist online shopping experience.',
-    // 🔥 在這裡補上內頁要用的詳細欄位！
     tech: 'Vue 3 / Vite / Pinia',
-    objective: 'To rebuild the core online shopping experience...',
     description: 'We abandoned heavy grid systems and embraced typographic tension...',
-    image: '/images/project1.png'
+    image: '/images/project1.png',
+    links: [
+      { label: 'LIVE DEMO', url: 'https://example.com' },
+      { label: 'GITHUB REPO', url: 'https://github.com' }
+    ]
   },
   {
     id: 5,
     title: 'E Commerce Platform',
-    category: 'WEB APP',
+    category: ['Vue', 'JavaScript'],
     tagline: 'A minimalist online shopping experience.',
-    // 🔥 在這裡補上內頁要用的詳細欄位！
     tech: 'Vue 3 / Vite / Pinia',
-    objective: 'To rebuild the core online shopping experience...',
     description: 'We abandoned heavy grid systems and embraced typographic tension...',
-    image: '/images/project1.png'
+    image: '/images/project1.png',
+    links: [
+      { label: 'LIVE DEMO', url: 'https://example.com' },
+      { label: 'GITHUB REPO', url: 'https://github.com' }
+    ]
   },
 ])
 

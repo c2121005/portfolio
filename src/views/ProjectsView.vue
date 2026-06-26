@@ -16,14 +16,19 @@ const router = useRouter()
 const currentCategory = ref('ALL')
 
 // 2. 定理所有的分類標籤清單（要跟資料庫/陣列中的 category 字串對應）
-const categories = ref(['ALL', 'WEB APP', 'BRANDING', 'CONCEPT'])
+const categories = ref(['ALL', 'VUE', 'JAVASCRIPT', 'USER & GRAPHIC DESIGN'])
 
 // 3. 核心邏輯：使用 computed 動態篩選符合當前分類的作品
 const filteredProjects = computed(() => {
   if (currentCategory.value === 'ALL') {
-    return props.projects // 若選 ALL 則回傳全部
+    return props.projects
   }
-  return props.projects.filter(project => project.category === currentCategory.value)
+
+  return props.projects.filter(project => {
+    if (!project.category || !Array.isArray(project.category)) return false
+
+    return project.category.includes(currentCategory.value)
+  })
 })
 
 // 點擊查看作品詳細頁的路由跳轉

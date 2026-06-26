@@ -30,19 +30,6 @@ const goBack = () => {
 
   <div v-else class="not-found">
     <p>[ ERR: PROJECT NOT FOUND ]</p>
-
-    <div class="debug-box">
-      <h4>🕵️‍♂️ 核心數據體檢：</h4>
-      <p><strong>1. 目前網址傳過來的 id：</strong> <span class="highlight">"{{ props.id }}"</span> (型態: {{ typeof props.id }})
-      </p>
-      <p><strong>2. 父層傳下來的 projects 數量：</strong> <span class="highlight">{{ props.projects ? props.projects.length : 0
-      }}</span> 筆</p>
-      <p v-if="props.projects && props.projects.length > 0">
-        <strong>3. 現有的作品 ID 清單：</strong>
-        <span class="highlight">[{{props.projects.map(p => p.id).join(', ')}}]</span>
-      </p>
-    </div>
-
     <button @click="goBack" class="debug-back-btn">GO BACK</button>
   </div>
 </template>

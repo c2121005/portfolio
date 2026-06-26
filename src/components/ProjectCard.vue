@@ -10,7 +10,16 @@ defineEmits(['view', 'toggle-favorite'])
 <template>
   <div class="project-card">
     <div class="card-header" :class="{ 'is-favorite-bg': isFavorite }">
-      <span class="category-tag">{{ project.category }}</span>
+      <div class="category-tags-wrapper">
+        <span 
+          v-for="(cat, index) in project.category" 
+          :key="index" 
+          class="category-tag"
+        >
+          [{{ cat }}]
+        </span>
+      </div>
+      
       <h3 class="project-title">{{ project.title }}</h3>
       <div class="project-bg-number">-0{{ project.id }}.</div>
     </div>

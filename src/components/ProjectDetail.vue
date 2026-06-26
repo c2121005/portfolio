@@ -6,12 +6,10 @@ defineEmits(['back'])
 <template>
   <div v-if="project" class="detail-container">
 
-    <!-- 🖼️ 左側：採用第一版的設計與按鈕樣式 -->
     <div class="panel-left"
       :style="{ '--bg-image': `url(${project?.image || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800'})` }">
       <div class="panel-left-overlay"></div>
 
-      <!-- 🧱 第一版經典黑框與重陰影按鈕 -->
       <button @click="$emit('back')" class="back-btn">
         &larr; BACK TO PORTFOLIO
       </button>
@@ -23,7 +21,6 @@ defineEmits(['back'])
       <div class="panel-footer-text">[ VISUAL SYSTEM DESIGN &copy; 2026 ]</div>
     </div>
 
-    <!-- 📝 右側：採用第二版的精密網格與對齊結構 -->
     <div class="panel-right">
       <div class="title-header-box">
         <h2 class="detail-title">{{ project.title ? project.title.replace(' ', '-') : '' }}</h2>
@@ -32,18 +29,14 @@ defineEmits(['back'])
       <div class="spec-table">
         <div class="table-row">
           <div class="table-cell">
+            <span class="label">[ Category ]</span>
+            <span class="value">
+              {{ Array.isArray(project.category) ? project.category.join(' / ') : project.category }}
+            </span>
+          </div>
+          <div class="table-cell">
             <span class="label">[ Tech Stack ]</span>
             <span class="value">{{ project.tech }}</span>
-          </div>
-          <div class="table-cell">
-            <span class="label">[ Category ]</span>
-            <span class="value">{{ project.category }}</span>
-          </div>
-        </div>
-        <div class="table-row full-width">
-          <div class="table-cell">
-            <span class="label">[ Objective ]</span>
-            <span class="value dark">{{ project.objective }}</span>
           </div>
         </div>
       </div>
@@ -51,6 +44,18 @@ defineEmits(['back'])
       <div class="content-body">
         <h3 class="section-tag">[ DESIGN APPROACH ]</h3>
         <p class="desc-text">{{ project.description }}</p>
+      </div>
+
+      <div v-if="project.links && project.links.length > 0" class="project-links-wrapper">
+        <a 
+          v-for="(link, index) in project.links" 
+          :key="index" 
+          :href="link.url" 
+          target="_blank" 
+          class="external-link-btn"
+        >
+          {{ link.label }} &rarr;
+        </a>
       </div>
 
       <div class="system-stamp">
@@ -75,7 +80,7 @@ defineEmits(['back'])
   }
 }
 
-/* 🖼️ 左側海報區（完全保留第一版設定） */
+/* 🖼️ 左側海報區 */
 .panel-left {
   position: relative;
   background-color: #1A3B8B;
@@ -113,7 +118,6 @@ defineEmits(['back'])
     top: 5rem;
     height: calc(100vh - 5rem);
     padding: 4rem 3rem;
-    /* 來自第一版的精密內距 */
   }
 }
 
@@ -165,7 +169,7 @@ defineEmits(['back'])
   opacity: 0.7;
 }
 
-/* 📝 右側資訊區（完全採用第二版的間距與對齊邏輯） */
+/* 📝 右側資訊區 */
 .panel-right {
   padding: 2rem;
   display: flex;
@@ -175,17 +179,16 @@ defineEmits(['back'])
 @media (min-width: 768px) {
   .panel-right {
     width: 55%;
-    /* 💡 來自第二版：上方 padding 完美讓標題對齊左邊按鈕下緣線 */
     padding: 3.8rem 4rem 4rem 4rem;
     margin-top: 4rem;
   }
 }
 
-/* 右側標題外框（第二版大標規格） */
+/* 右側標題外框 */
 .title-header-box {
   margin-bottom: 2rem;
   border-bottom: 4px solid #1A3B8B;
-  padding-bottom: 1.5rem;
+  padding-bottom: 2.5rem;
 }
 
 .detail-title {
@@ -208,15 +211,14 @@ defineEmits(['back'])
 .table-row {
   display: flex;
   gap: 2rem;
-  margin-bottom: 1.5rem;
-}
-
-.table-row.full-width {
-  margin-bottom: 0;
 }
 
 .table-cell {
   flex: 1;
+}
+
+.content-body{
+    margin-bottom: 1rem;
 }
 
 .label {
@@ -254,7 +256,38 @@ defineEmits(['back'])
   font-size: 1.05rem;
   line-height: 1.6;
   color: #333333;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem; /* 稍微縮小底距，讓連結按鈕向上推近 */
+}
+
+/* ➕ 全新設計：連結按鈕容器排版 */
+.project-links-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 4rem; /* 與最下方 stamp 保持剛好的粗獷呼吸距離 */
+}
+
+/* ➕ 全新設計：粗獷硬派風格連結按鈕 */
+.external-link-btn {
+  background-color: #1A3B8B; /* 品牌皇家藍底色 */
+  color: #F9EFE6;
+  border: 2px solid #1A3B8B;
+  font-weight: 800;
+  font-family: monospace;
+  font-size: 0.85rem;
+  padding: 0.8rem 1.5rem;
+  text-decoration: none; /* 拔除超連結底線 */
+  letter-spacing: 0.05em;
+  box-shadow: 4px 4px 0px #D93829; /* 強烈標誌性紅色重陰影 */
+  transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s;
+}
+
+.external-link-btn:hover {
+  background-color: #D93829; /* 懸停時與陰影融合變火熱紅 */
+  border-color: #D93829;
+  color: #F9EFE6;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #D93829;
 }
 
 /* 全新結尾戳記 */
