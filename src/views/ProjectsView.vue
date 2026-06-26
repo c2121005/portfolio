@@ -16,7 +16,7 @@ const router = useRouter()
 const currentCategory = ref('ALL')
 
 // 2. 定理所有的分類標籤清單（要跟資料庫/陣列中的 category 字串對應）
-const categories = ref(['ALL', 'VUE', 'JAVASCRIPT', 'USER & GRAPHIC DESIGN'])
+const categories = ref(['ALL', 'VUE', 'USER DESIGN', 'GRAPHIC DESIGN'])
 
 // 3. 核心邏輯：使用 computed 動態篩選符合當前分類的作品
 const filteredProjects = computed(() => {

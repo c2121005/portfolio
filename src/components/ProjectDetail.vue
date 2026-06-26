@@ -6,13 +6,15 @@ defineEmits(['back'])
 <template>
   <div v-if="project" class="detail-container">
 
-    <div class="panel-left"
-      :style="{ '--bg-image': `url(${project?.image || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800'})` }">
-      <div class="panel-left-overlay"></div>
-
+    <div class="panel-left">
       <button @click="$emit('back')" class="back-btn">
         &larr; BACK TO PORTFOLIO
       </button>
+
+      <div class="project-image-frame">
+        <img :src="project?.image || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800'"
+          :alt="project?.title" class="project-thumb-img" />
+      </div>
 
       <div class="hero-info-box">
         <p class="detail-serial">// PROJECT -0{{ project.id }}.</p>
@@ -43,17 +45,12 @@ defineEmits(['back'])
 
       <div class="content-body">
         <h3 class="section-tag">[ DESIGN APPROACH ]</h3>
-        <p class="desc-text">{{ project.description }}</p>
+        <p class="desc-text" style="white-space: pre-line;">{{ project.description }}</p>
       </div>
 
       <div v-if="project.links && project.links.length > 0" class="project-links-wrapper">
-        <a 
-          v-for="(link, index) in project.links" 
-          :key="index" 
-          :href="link.url" 
-          target="_blank" 
-          class="external-link-btn"
-        >
+        <a v-for="(link, index) in project.links" :key="index" :href="link.url" target="_blank"
+          class="external-link-btn">
           {{ link.label }} &rarr;
         </a>
       </div>
@@ -77,6 +74,9 @@ defineEmits(['back'])
 @media (min-width: 768px) {
   .detail-container {
     flex-direction: row;
+    /* 📌 鎖定整體最大高度為剩餘視窗高度，並切掉外層滾動條 */
+    height: calc(100vh - 5rem);
+    overflow: hidden;
   }
 }
 
@@ -84,31 +84,12 @@ defineEmits(['back'])
 .panel-left {
   position: relative;
   background-color: #1A3B8B;
-  background-image: var(--bg-image);
-  background-size: cover;
-  background-position: center;
   padding: 3rem 2rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  transition: all 0.5s ease;
-}
-
-.panel-left-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(26, 59, 139, 0.88);
-  mix-blend-mode: multiply;
-  transition: all 0.4s ease;
-  z-index: 1;
-}
-
-.panel-left:hover .panel-left-overlay {
-  background-color: rgba(26, 59, 139, 0.2);
 }
 
 @media (min-width: 768px) {
@@ -116,9 +97,35 @@ defineEmits(['back'])
     width: 45%;
     position: sticky;
     top: 5rem;
-    height: calc(100vh - 5rem);
+    height: 100%; /* 繼承父層完美比例 */
     padding: 4rem 3rem;
+    margin-bottom: 0;
   }
+}
+
+/* 📸 粗獷粗黑框小圖片區塊 */
+.project-image-frame {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 4px solid #F9EFE6;
+  background-color: #222222;
+  box-shadow: 6px 6px 0px #D93829;
+  overflow: hidden;
+  margin: 2rem 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-image-frame:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px #D93829;
+}
+
+.project-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(10%) contrast(105%);
 }
 
 .back-btn,
@@ -128,7 +135,7 @@ defineEmits(['back'])
   z-index: 2;
 }
 
-/* 🧱 第一版：硬派黑邊框重陰影按鈕 */
+/* 🧱 硬派黑邊框重陰影按鈕 */
 .back-btn {
   background-color: #F9EFE6;
   color: #1A3B8B;
@@ -179,8 +186,11 @@ defineEmits(['back'])
 @media (min-width: 768px) {
   .panel-right {
     width: 55%;
-    padding: 3.8rem 4rem 4rem 4rem;
-    margin-top: 4rem;
+    height: 100%;
+    /* 📌 核心修改：如果右邊內容變多（文字多或按鈕多），只讓右邊局部安全滾動 */
+    overflow-y: auto; 
+    /* 調整對齊線：將之前的 margin-top 改為 padding 內的延伸，防止撐大視窗高度 */
+    padding: 7.5rem 4rem 4rem 4rem; 
   }
 }
 
@@ -217,8 +227,8 @@ defineEmits(['back'])
   flex: 1;
 }
 
-.content-body{
-    margin-bottom: 1rem;
+.content-body {
+  margin-bottom: 3rem;
 }
 
 .label {
@@ -256,34 +266,34 @@ defineEmits(['back'])
   font-size: 1.05rem;
   line-height: 1.6;
   color: #333333;
-  margin-bottom: 2rem; /* 稍微縮小底距，讓連結按鈕向上推近 */
+  margin-bottom: 2rem;
 }
 
-/* ➕ 全新設計：連結按鈕容器排版 */
+/* 全新連結按鈕容器排版 */
 .project-links-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  margin-bottom: 4rem; /* 與最下方 stamp 保持剛好的粗獷呼吸距離 */
+  margin-bottom: 4rem;
 }
 
-/* ➕ 全新設計：粗獷硬派風格連結按鈕 */
+/* 粗獷硬派風格連結按鈕 */
 .external-link-btn {
-  background-color: #1A3B8B; /* 品牌皇家藍底色 */
+  background-color: #1A3B8B;
   color: #F9EFE6;
   border: 2px solid #1A3B8B;
   font-weight: 800;
   font-family: monospace;
   font-size: 0.85rem;
   padding: 0.8rem 1.5rem;
-  text-decoration: none; /* 拔除超連結底線 */
+  text-decoration: none;
   letter-spacing: 0.05em;
-  box-shadow: 4px 4px 0px #D93829; /* 強烈標誌性紅色重陰影 */
+  box-shadow: 4px 4px 0px #D93829;
   transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s;
 }
 
 .external-link-btn:hover {
-  background-color: #D93829; /* 懸停時與陰影融合變火熱紅 */
+  background-color: #D93829;
   border-color: #D93829;
   color: #F9EFE6;
   transform: translate(2px, 2px);
