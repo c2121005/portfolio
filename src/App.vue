@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import NavBar from './components/NavBar.vue'
-import project1 from '@/assets/img/project1.png'
-import project2 from '@/assets/img/project2.png'
-import project3 from '@/assets/img/project3.png'
-import project4 from '@/assets/img/project4.png'
-import project5 from '@/assets/img/project5.png'
+import project1 from '@/assets/img/1.png'
+import project2 from '@/assets/img/2.png'
+import project3 from '@/assets/img/3.png'
+import project4 from '@/assets/img/4.png'
+import project5 from '@/assets/img/5.png'
 
 // 需求 6：作品集資料寫在 Vue 檔案中集中管理
 const projects = ref([
