@@ -4,17 +4,14 @@ import { useRouter } from 'vue-router'
 import ProjectDetail from '../components/ProjectDetail.vue'
 
 const props = defineProps({
-  id: [String, Number], // ⭕ 寬容型態，接受字串或數字
-  projects: Array  // 由 App.vue 傳下來的共享資料
+  id: [String, Number],
+  projects: Array
 })
 
 const router = useRouter()
 
-// 依據路由參數 id，過濾出該項作品的完整物件
 const targetProject = computed(() => {
   if (!props.projects) return null
-  // 🔍 網址抓下來的 id (props.id) 是字串型態，
-  // 為了安全，我們通通轉成 String 來比對，就不會因為強轉 parseInt 失敗而 error 了！
   return props.projects.find(p => String(p.id) === String(props.id))
 })
 
@@ -43,7 +40,6 @@ const goBack = () => {
   font-weight: bold;
 }
 
-/* 瑞士粗獷風格除錯框 */
 .debug-box {
   margin: 2rem auto;
   max-width: 500px;

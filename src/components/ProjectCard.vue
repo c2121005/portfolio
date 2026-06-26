@@ -1,25 +1,19 @@
-
 <script setup>
 defineProps({
   project: Object,
-  isFavorite: Boolean
 })
-defineEmits(['view', 'toggle-favorite'])
+defineEmits(['view'])
 </script>
 
 <template>
   <div class="project-card">
-    <div class="card-header" :class="{ 'is-favorite-bg': isFavorite }">
+    <div class="card-header">
       <div class="category-tags-wrapper">
-        <span 
-          v-for="(cat, index) in project.category" 
-          :key="index" 
-          class="category-tag"
-        >
+        <span v-for="(cat, index) in project.category" :key="index" class="category-tag">
           [{{ cat }}]
         </span>
       </div>
-      
+
       <h3 class="project-title">{{ project.title }}</h3>
       <div class="project-bg-number">-0{{ project.id }}.</div>
     </div>
@@ -30,9 +24,6 @@ defineEmits(['view', 'toggle-favorite'])
       <div class="card-actions">
         <button class="btn btn-primary" @click="$emit('view', project.id)">
           查看作品 &rarr;
-        </button>
-        <button class="btn btn-secondary" @click.stop="$emit('toggle-favorite', project.id)">
-          {{ isFavorite ? '★ 已收' : '☆ 收藏' }}
         </button>
       </div>
     </div>
@@ -46,8 +37,6 @@ defineEmits(['view', 'toggle-favorite'])
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-  /* 鎖定這行！強迫卡片一定要吃滿外層分配給它的 RWD 寬度 */
   width: 100%;
   height: 100%;
   transition: all 0.3s ease;
@@ -65,8 +54,7 @@ defineEmits(['view', 'toggle-favorite'])
   transition: background-color 0.3s ease;
 }
 
-.project-card:hover .card-header,
-.is-favorite-bg {
+.project-card:hover .card-header {
   background-color: #D93829;
 }
 
@@ -138,16 +126,5 @@ defineEmits(['view', 'toggle-favorite'])
 
 .btn-primary:hover {
   background-color: #D93829;
-}
-
-.btn-secondary {
-  background-color: transparent;
-  border: 1px solid #D93829;
-  color: #D93829;
-}
-
-.btn-secondary:hover {
-  background-color: #D93829;
-  color: #F9EFE6;
 }
 </style>

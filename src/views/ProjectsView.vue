@@ -3,22 +3,16 @@ import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import ProjectCard from '../components/ProjectCard.vue'
 
-// 承接從 App.vue 傳下來的共享資料
 const props = defineProps({
   projects: Array,
-  favorites: Array
 })
 
-const emit = defineEmits(['toggle-favorite'])
 const router = useRouter()
 
-// 1. 宣告目前選中的分類狀態，預設為 'ALL'
 const currentCategory = ref('ALL')
 
-// 2. 定理所有的分類標籤清單（要跟資料庫/陣列中的 category 字串對應）
 const categories = ref(['ALL', 'VUE', 'USER DESIGN', 'GRAPHIC DESIGN'])
 
-// 3. 核心邏輯：使用 computed 動態篩選符合當前分類的作品
 const filteredProjects = computed(() => {
   if (currentCategory.value === 'ALL') {
     return props.projects
@@ -31,13 +25,8 @@ const filteredProjects = computed(() => {
   })
 })
 
-// 點擊查看作品詳細頁的路由跳轉
 const handleViewDetail = (id) => {
   router.push(`/projects/${id}`)
-}
-
-const handleToggleFav = (id) => {
-  emit('toggle-favorite', id)
 }
 </script>
 
@@ -59,9 +48,8 @@ const handleToggleFav = (id) => {
     </div>
 
     <div class="projects-grid" v-if="filteredProjects.length > 0">
-      <div v-for="proj in filteredProjects" :key="proj.id" class="grid-item">
-        <ProjectCard :project="proj" :is-favorite="favorites.includes(proj.id)" @view="handleViewDetail"
-          @toggle-favorite="handleToggleFav" />
+      <div v-for="project in filteredProjects" :key="project.id" class="grid-item">
+        <ProjectCard :project="project" @view="handleViewDetail" />
       </div>
     </div>
 
@@ -105,7 +93,6 @@ const handleToggleFav = (id) => {
   font-weight: 700;
 }
 
-/* 分類按鈕區排版 */
 .filter-wrapper {
   margin-bottom: 3rem;
 }
@@ -133,7 +120,6 @@ const handleToggleFav = (id) => {
   color: #D93829;
 }
 
-/* 當前被選中分類的強烈紅底反白樣式 */
 .filter-btn.filter-active {
   background-color: #D93829;
   color: #F9EFE6;
@@ -145,12 +131,8 @@ const handleToggleFav = (id) => {
   width: 100%;
 }
 
-/* ==========================================================================
-   全新修正版 RWD Grid (修正 columns 拼字)
-   ========================================================================== */
 .projects-grid {
   display: grid;
-  /* ⭕ 注意：是 columns 不是 cols！ */
   grid-template-columns: 1fr;
   gap: 2.5rem;
   width: 100%;
@@ -159,17 +141,14 @@ const handleToggleFav = (id) => {
 .grid-item {
   width: 100%;
   min-width: 0;
-  /* 防止內層元件超出邊界 */
 }
 
-/* 💻 當螢幕寬度達到 1024px（筆電）：切換為 2 欄 */
 @media screen and (min-width: 1024px) {
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* 🖥️ 當螢幕寬度達到 1440px 以上（大螢幕）：切換為 3 欄 */
 @media screen and (min-width: 1440px) {
   .projects-grid {
     grid-template-columns: repeat(3, 1fr);

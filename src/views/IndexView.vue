@@ -73,8 +73,6 @@
       </router-link>
     </div>
   </div>
-
-  <!-- <div class="index-2">AAAAA</div> -->
 </template>
 
 <style scoped>
@@ -95,7 +93,6 @@
   margin-bottom: 2rem;
 }
 
-/* 雙欄主佈局 */
 .main-layout {
   display: flex;
   flex-direction: column;
@@ -156,23 +153,23 @@
   bottom: 2rem;
   text-align: right;
   font-family: monospace;
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .year-stamp {
-    display: block;
-  }
+  display: block;
 }
 
 .year-num {
-  font-size: 4rem;
+  font-size: 2.2rem;
   font-weight: 900;
-  line-height: 1;
+  line-height: 0.95;
   color: #1A3B8B;
 }
 
-/* 印刷加工對位符號線 */
+@media (min-width: 768px) {
+  .year-num {
+    font-size: 4rem;
+    line-height: 1;
+  }
+}
+
 .cross-mark {
   position: absolute;
   width: 20px;
@@ -194,7 +191,6 @@
   border-right: 2px solid #1A3B8B;
 }
 
-/* 右側描述文字設計 */
 .intro-section {
   display: flex;
   flex-direction: column;
@@ -235,7 +231,6 @@
   text-align: justify;
 }
 
-/* 經歷快照細線排版 */
 .experience-snapshot {
   margin-top: 2.5rem;
   border-top: 1px solid #1A3B8B;
@@ -263,14 +258,11 @@
   font-weight: 500;
 }
 
-/* 底部按鈕區 */
 .view-footer {
   margin-top: 3rem;
   width: 100%;
   display: flex;
-  /* 啟用 flex 佈局 */
   justify-content: flex-end;
-  /* 讓裡面的元件全部靠右對齊 */
 }
 
 .footer-grid-line {

@@ -7,7 +7,6 @@ import project3 from '@/assets/img/3.webp'
 import project4 from '@/assets/img/4.webp'
 import project5 from '@/assets/img/5.webp'
 
-// 需求 6：作品集資料寫在 Vue 檔案中集中管理
 const projects = ref([
   {
     id: 1,
@@ -85,32 +84,19 @@ const projects = ref([
     ]
   },
 ])
-
-// 挑戰題：收藏狀態清單（紀錄被收藏的作品 id）
-const favorites = ref([])
-
-const handleToggleFavorite = (id) => {
-  const index = favorites.value.indexOf(id)
-  if (index === -1) {
-    favorites.value.push(id) // 未收藏則加入
-  } else {
-    favorites.value.splice(index, 1) // 已收藏則移除
-  }
-}
 </script>
 
 <template>
   <div class="app-wrapper">
-    <NavBar :favorite-count="favorites.length" />
+    <NavBar />
 
     <div class="main-content">
-      <router-view :projects="projects" :favorites="favorites" @toggle-favorite="handleToggleFavorite" />
+      <router-view :projects="projects" />
     </div>
   </div>
 </template>
 
 <style>
-/* 這裡不加 scoped，作為全站環境的基礎底層設定 */
 * {
   box-sizing: border-box;
 }
@@ -119,7 +105,6 @@ body {
   margin: 0;
   padding: 0;
   background-color: #F9EFE6;
-  /* 你要的粉白主底色 */
   color: #222222;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -132,10 +117,8 @@ body {
 
 .main-content {
   padding-top: 5rem;
-  /* 保留頂部導覽列的高度空間 */
 }
 
-/* 全局反白特殊色 (紅底白字，瑞士風格加分細節) */
 ::selection {
   background-color: #D93829;
   color: #F9EFE6;

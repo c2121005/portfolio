@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import SkillCard from '../components/SkillCard.vue'
 
-// 調整陣列結構，把技能與用途直接拆開
 const skillList = ref([
   { skill: 'illustrator / photoshop', purpose: 'Graphic Design', level: 'ADVANCED' },
   { skill: 'rhino / keyshot', purpose: 'Product Design', level: 'Intermediate' },
@@ -20,7 +19,6 @@ const skillList = ref([
 
     <div class="content-area">
       <div class="skills-grid">
-        <!-- 這裡改為個別傳入 skill 與 purpose -->
         <SkillCard v-for="item in skillList" :key="item.skill" :skill="item.skill" :purpose="item.purpose"
           :level="item.level" />
       </div>
@@ -29,7 +27,6 @@ const skillList = ref([
 </template>
 
 <style scoped>
-/* 頁面 1 的 CSS 完全沒變，保留你原本的配色與 font-style */
 .skills-container {
   display: flex;
   flex-direction: column;

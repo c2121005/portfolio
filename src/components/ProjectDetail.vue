@@ -74,13 +74,11 @@ defineEmits(['back'])
 @media (min-width: 768px) {
   .detail-container {
     flex-direction: row;
-    /* 📌 鎖定整體最大高度為剩餘視窗高度，並切掉外層滾動條 */
     height: calc(100vh - 5rem);
     overflow: hidden;
   }
 }
 
-/* 🖼️ 左側海報區 */
 .panel-left {
   position: relative;
   background-color: #1A3B8B;
@@ -97,13 +95,12 @@ defineEmits(['back'])
     width: 45%;
     position: sticky;
     top: 5rem;
-    height: 100%; /* 繼承父層完美比例 */
+    height: 100%;
     padding: 4rem 3rem;
     margin-bottom: 0;
   }
 }
 
-/* 📸 粗獷粗黑框小圖片區塊 */
 .project-image-frame {
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -135,7 +132,6 @@ defineEmits(['back'])
   z-index: 2;
 }
 
-/* 🧱 硬派黑邊框重陰影按鈕 */
 .back-btn {
   background-color: #F9EFE6;
   color: #1A3B8B;
@@ -176,7 +172,6 @@ defineEmits(['back'])
   opacity: 0.7;
 }
 
-/* 📝 右側資訊區 */
 .panel-right {
   padding: 2rem;
   display: flex;
@@ -187,14 +182,11 @@ defineEmits(['back'])
   .panel-right {
     width: 55%;
     height: 100%;
-    /* 📌 核心修改：如果右邊內容變多（文字多或按鈕多），只讓右邊局部安全滾動 */
-    overflow-y: auto; 
-    /* 調整對齊線：將之前的 margin-top 改為 padding 內的延伸，防止撐大視窗高度 */
-    padding: 7.5rem 4rem 4rem 4rem; 
+    overflow-y: auto;
+    padding: 7.5rem 4rem 4rem 4rem;
   }
 }
 
-/* 右側標題外框 */
 .title-header-box {
   margin-bottom: 2rem;
   border-bottom: 4px solid #1A3B8B;
@@ -211,7 +203,6 @@ defineEmits(['back'])
   letter-spacing: -0.03em;
 }
 
-/* 細線規格表 */
 .spec-table {
   border-bottom: 1px solid #1A3B8B;
   padding-bottom: 2rem;
@@ -269,7 +260,6 @@ defineEmits(['back'])
   margin-bottom: 2rem;
 }
 
-/* 全新連結按鈕容器排版 */
 .project-links-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -277,7 +267,6 @@ defineEmits(['back'])
   margin-bottom: 4rem;
 }
 
-/* 粗獷硬派風格連結按鈕 */
 .external-link-btn {
   background-color: #1A3B8B;
   color: #F9EFE6;
@@ -300,7 +289,6 @@ defineEmits(['back'])
   box-shadow: 2px 2px 0px #D93829;
 }
 
-/* 全新結尾戳記 */
 .system-stamp {
   margin-top: auto;
   border-top: 1px dashed #1A3B8B;
