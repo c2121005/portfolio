@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import ProjectDetail from '../components/ProjectDetail.vue'
 
 const props = defineProps({
@@ -9,6 +9,7 @@ const props = defineProps({
 })
 
 const router = useRouter()
+const route = useRoute()
 
 const targetProject = computed(() => {
   if (!props.projects) return null
@@ -16,7 +17,10 @@ const targetProject = computed(() => {
 })
 
 const goBack = () => {
-  router.push('/projects')
+  router.push({
+    path: '/projects',
+    query: { cat: route.query.cat || 'ALL' }
+  })
 }
 </script>
 
@@ -24,7 +28,6 @@ const goBack = () => {
   <div v-if="targetProject">
     <ProjectDetail :project="targetProject" @back="goBack" />
   </div>
-
   <div v-else class="not-found">
     <p>[ ERR: PROJECT NOT FOUND ]</p>
     <button @click="goBack" class="debug-back-btn">GO BACK</button>

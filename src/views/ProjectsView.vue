@@ -1,32 +1,39 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import ProjectCard from '../components/ProjectCard.vue'
 
 const props = defineProps({
-  projects: Array,
+  projects: Array
 })
 
 const router = useRouter()
+const route = useRoute()
 
 const currentCategory = ref('ALL')
-
 const categories = ref(['ALL', 'VUE', 'USER DESIGN', 'GRAPHIC DESIGN'])
+
+onMounted(() => {
+  if (route.query.cat && categories.value.includes(route.query.cat)) {
+    currentCategory.value = route.query.cat
+  }
+})
 
 const filteredProjects = computed(() => {
   if (currentCategory.value === 'ALL') {
     return props.projects
   }
-
   return props.projects.filter(project => {
     if (!project.category || !Array.isArray(project.category)) return false
-
     return project.category.includes(currentCategory.value)
   })
 })
 
 const handleViewDetail = (id) => {
-  router.push(`/projects/${id}`)
+  router.push({
+    path: `/projects/${id}`,
+    query: { cat: currentCategory.value }
+  })
 }
 </script>
 
@@ -49,7 +56,10 @@ const handleViewDetail = (id) => {
 
     <div class="projects-grid" v-if="filteredProjects.length > 0">
       <div v-for="project in filteredProjects" :key="project.id" class="grid-item">
-        <ProjectCard :project="project" @view="handleViewDetail" />
+        <ProjectCard 
+          :project="project" 
+          @view="handleViewDetail" 
+        />
       </div>
     </div>
 
@@ -93,6 +103,7 @@ const handleViewDetail = (id) => {
   font-weight: 700;
 }
 
+/* 分類按鈕區排版 */
 .filter-wrapper {
   margin-bottom: 3rem;
 }
